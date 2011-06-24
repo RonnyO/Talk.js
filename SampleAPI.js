@@ -5,8 +5,8 @@ talk._ = {};
 
 // or maybe
 talk = {
-    extend: func;
-    _: {};
+    extend: func,
+    _: {}
 };
 
 // Core js
@@ -23,13 +23,13 @@ talk.extend({
 talk.extend({
     'myTheme': {}
 })
-    .listen({
+	.listen({
     'post': talk.myTheme
 });
 
 // Reporter.js
 talk.extend({
-    'reporter': func(){}
+    'reporter': func
 });
 
 // GoogleAnalytics (extension)
@@ -39,9 +39,9 @@ talk.reporter.extend({
 });
 
 // to make this work
-talk._.extend: function(name, func){
+talk._.extend = function(name, func){
    this[name] = new TalkFunc(func);
-}
+};
 
 function TalkFunc(func){
     func.extend = extend;
@@ -60,4 +60,9 @@ talk.shout.extend({
         'plsTweet': function(){
             $('.plsTweet', postForm).slideDown();
         }
+	}
 });
+
+
+// ignore this
+function func(){};
