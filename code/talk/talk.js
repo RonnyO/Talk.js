@@ -7,6 +7,10 @@ var DB            = require('./include/mongoose'),
  */
 var Talk = function(){
 
+  /** @@NOTE
+   * Calls to private methods in the Talk module should be done using call / apply to perserve the execution scope.
+   */
+
   /** Entry point to ORM abstraction layer **/
   this.models = {};
 
@@ -47,6 +51,14 @@ var Talk = function(){
     auto_load.apply(this, [obj_name, init_callback]);
   }
 
+  /**
+   * Auto load a directory as package and map loaded modules into an object.
+   * Used to autoload models and plugins.
+   * @param {String} obj_name - Name of the loaded package. Used to find the package's directory and Talk object it maps to.
+   *                            Should be by convension the name of the directory defining the package.
+   *                            For example, the models package is inside ./models directory (relative to talk.js) and is mapped to this.models
+   * @param {Function} init_function - Function to execute for each loaded module in the package
+   */
   function auto_load(obj_name, init_function){
     var package       = require('./'+obj_name),
         package_files = fs.readdirSync(__dirname+'/'+obj_name);
@@ -59,6 +71,7 @@ var Talk = function(){
     }.bind(this));
   }
 
+  /** Call the boot function **/
   boot.call(this);
 }
 
