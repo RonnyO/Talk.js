@@ -23,9 +23,11 @@ Talk.models.user.remove({'first_name':'Zohar'},function(){
 	console.log(arguments);
 });
 
-var q = Talk.models.user.object().find({}).where('first_name','Zoharush').limit(1);
+// use the model directly. example with regexp query
+var q = Talk.models.user.object().find({}).where('first_name',/^z/i).limit(1);
 
 q.exec(function(err,doc){
 	console.log(err,doc);
 });
+
 */
