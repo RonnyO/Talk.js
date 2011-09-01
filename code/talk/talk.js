@@ -9,12 +9,17 @@ var Talk = function(){
 
   /** Entry point to ORM abstraction layer **/
   this.models = {};
+
+  /** Entry point to plugins **/
+  this.plugins = {};
+
   /**
    * Internal boot of the Talk instance.
    * Add any relevant private boot-related calls here.
    */
   function boot(){
     init_orm.call(this);
+    load_plugins.call(this);
   }
   
   /**
@@ -23,18 +28,37 @@ var Talk = function(){
    * For example talk.user will map to the User model assuming we have a User model defined under models/user.js
    */
   function init_orm(){
-    var models      = require('./models'),
-        model_files = fs.readdirSync(__dirname+'/models'),
-        _this       = this;
-        
-    model_files.forEach(function(file){
-      if(file !== 'index.js'){
-        var model = file.replace(/\.js/,'');
-        _this.models[model] = new AbstractModel(models[model]);
-      }
-    });
+    var obj_name = 'models';
+    var init_callback = function(package, package_name){
+      this.models[package_name] = new AbstractModel(package[package_name]);
+    }
+    auto_load.apply(this, [obj_name, init_callback]);
   }
   
+  /**
+   * Talk plugins autoloading.
+   * Load any plugins inside ./plugins and map them to this.plugins
+   */
+  function load_plugins(){
+    var obj_name = 'plugins';
+    var init_callback = function(package, package_name){
+      this.plugins[package_name] = new package[package_name](this);
+    }
+    auto_load.apply(this, [obj_name, init_callback]);
+  }
+
+  function auto_load(obj_name, init_function){
+    var package       = require('./'+obj_name),
+        package_files = fs.readdirSync(__dirname+'/'+obj_name);
+        
+    package_files.forEach(function(file){
+      if(file !== 'index.js'){
+        var package_name = file.replace(/\.js/,'');
+        init_function.apply(this, [package, package_name]);
+      }
+    }.bind(this));
+  }
+
   boot.call(this);
 }
 
