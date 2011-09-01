@@ -3,23 +3,29 @@ var Talk = require('./talk');
 Talk.init();
 
 /*
-// insertion
-var user = new Talk.ORM.User({
-  first_name:'James',
-  last_name:'Brown',
-  email:'james@brown.com'
+Talk.models.user.create({
+	'first_name':'Zoharush',
+	'last_name':'The Arad',
+	'email':'zohar@zohar.com'
+}, function(err){
+	console.log(err);
 });
 
-user.save(function(err){
-  console.log(err || 'Success');
-})
-
-// simple find
-Talk.ORM.User.find({},function(err,docs){
-  docs.forEach(function(doc){
-    console.log(doc);
-  });
+Talk.models.user.update({'first_name':'Zohar'},{'email':'zohar@zohararad.com'},function(){
+	console.log('update',arguments);
 });
 
+var results = Talk.models.user.find({}, null, {limit:1}, function(){
+	console.log(arguments);
+});
+
+Talk.models.user.remove({'first_name':'Zohar'},function(){
+	console.log(arguments);
+});
+
+var q = Talk.models.user.object().find({}).where('first_name','Zoharush').limit(1);
+
+q.exec(function(err,doc){
+	console.log(err,doc);
+});
 */
-

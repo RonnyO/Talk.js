@@ -1,14 +1,43 @@
 var DB = require('./include/mongoose'),
     fs = require('fs');
 
+var AbstractModel = function(Model){
+
+  this.create = function(attrs, callback){
+    attrs['created_at'] = new Date();
+    var model = new Model(attrs);
+    return model.save(callback);
+  }
+
+  this.find = function(query, fields, options, callback){
+    return Model.find(query, fields, options, callback);
+  }
+
+  this.update = function(conditions, update, options, callback){
+    if(typeof(options) === 'function' && typeof(callback) === 'undefined'){
+      var callback = options,
+          options = null;
+    }
+    return Model.update(conditions, update, options, callback);
+  }
+
+  this.remove = function(conditions, callback){
+    return Model.remove(conditions, callback);
+  }
+
+  this.object = function(){
+    return Model;
+  }
+
+}
+
 /**
  * Define the Talk object
  */
 var Talk = function(){
-  
-  /** Object to hold all application models within a confined namespace **/
-  this.ORM = {};
-  
+
+  /** Entry point to ORM abstraction layer **/
+  this.models = {};
   /**
    * Internal boot of the Talk instance.
    * Add any relevant private boot-related calls here.
@@ -25,12 +54,12 @@ var Talk = function(){
   function init_orm(){
     var models      = require('./models'),
         model_files = fs.readdirSync(__dirname+'/models'),
-        _self       = this;
+        _this       = this;
         
     model_files.forEach(function(file){
       if(file !== 'index.js'){
-        var model = (file.charAt(0).toUpperCase() + file.slice(1)).replace(/\.js/,'');
-        _self.ORM[model] = models[model];
+        var model = file.replace(/\.js/,'');
+        _this.models[model] = new AbstractModel(models[model]);
       }
     });
   }
