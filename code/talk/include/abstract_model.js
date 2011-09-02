@@ -8,8 +8,7 @@ var AbstractModel = function(Model){
   this.create = function(attrs, callback){
     attrs['created_at'] = new Date();
     var model = new Model(attrs);
-    model.save(callback);
-    return this;
+    model.save(callback.bind(this));
   }
 
   /**
@@ -18,8 +17,8 @@ var AbstractModel = function(Model){
    * @param {Function} callback - count action callback
    */
   this.count = function(conditions, callback){
-    Model.count.apply(Model, arguments);
-    return this;
+    var args = get_args_with_scoped_callback.call(this,arguments);
+    Model.count.apply(Model, args);
   }
   
   /**
@@ -30,8 +29,8 @@ var AbstractModel = function(Model){
    * @param {Function} callback - search action callback
    */
   this.find = function(query, fields, options, callback){
-    Model.find.apply(Model, arguments);
-    return this;
+    var args = get_args_with_scoped_callback.call(this,arguments);
+    Model.find.apply(Model, args);
   }
   
   /**
@@ -42,8 +41,8 @@ var AbstractModel = function(Model){
    * @param {Function} callback - search action callback
    */
   this.findOne = function(query, fields, options, callback){
-    Model.findOne.apply(Model, arguments);
-    return this;
+    var args = get_args_with_scoped_callback.call(this,arguments);
+    Model.findOne.apply(Model, args);
   }
   
   /**
@@ -54,8 +53,8 @@ var AbstractModel = function(Model){
    * @param {Function} callback - search action callback
    */
   this.findById = function(id, fields, callback){
-    Model.findById(id, fields, callback);
-    return this;
+    var args = get_args_with_scoped_callback.call(this,arguments);
+    Model.findById.apply(Model, args);
   }
 
   /**
@@ -66,8 +65,8 @@ var AbstractModel = function(Model){
    * @param {Function} callback - update action callback
    */
   this.update = function(conditions, update, options, callback){
-    Model.update.apply(Model, arguments);
-    return this;
+    var args = get_args_with_scoped_callback.call(this,arguments);
+    Model.update.apply(Model, args);
   }
   
   /**
@@ -76,8 +75,7 @@ var AbstractModel = function(Model){
    * @param {Function} callback - remove action callback
    */
   this.remove = function(conditions, callback){
-    Model.remove(conditions, callback);
-    return this;
+    Model.remove(conditions, callback.bind(this));
   }
 
   /**
@@ -86,7 +84,24 @@ var AbstractModel = function(Model){
   this.object = function(){
     return Model;
   }
-
+  
+  /**
+   * Modifies a callback in args to run under the model's scope.
+   * Allows to refer to the model using 'this' inside a callback
+   * @param {Object} args - model method arguments
+   */
+  var get_args_with_scoped_callback = function(args){
+    for(var k in args){
+      if(args.hasOwnProperty(k)){
+        var arg = args[k];
+        if(typeof(arg) === 'function'){
+          console.log(k);
+          args[k] = arg.bind(this);
+        }
+      }
+    }
+    return args;
+  }
 }
 
 module.exports = AbstractModel;

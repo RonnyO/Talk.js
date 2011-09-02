@@ -143,3 +143,26 @@ Finally, we can count documents in our users model using the *count* method like
     Talk.models.user.count(conditions,function(err, c){
       console.log('We have '+c+' users who\'s first name starts with "zohar"');
     });
+
+#### Model callbacks scope
+
+Lets assume we want to create a new document and immidiately count how many documents we have after insertion. Technically, we could refer to our Talk model by its fully qualified name inside our *create* callback, but
+that feels a bit tedious. Instead, Talk scopes any model callback to the Model API, using **this**. So, in our *create* callback, we would refer to the *Talk.models.somemodel* using **this** rather than using its fully-qualified 
+name.
+  
+    // Lets add Neil Finn to our users collection
+    var user = {
+      'first_name':'Neil',
+      'last_name':'Finn',
+      'email':'neil.finn@crowdedhouse.com'
+    }
+    
+    Talk.models.user.create(user, function(err){
+      if(err){
+        // ... do something with your errors
+      } else {
+        this.count({last_name:'Finn'},function(err, counter)){
+          console.log('We have ' + (counter || 0) + 'users whos last name is "Finn"');
+        }
+      }
+    });
