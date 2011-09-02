@@ -140,6 +140,6 @@ Finally, we can count documents in our users model using the *count* method like
 
     var conditions = { name: /zohar/i };
     
-    Talk.models.user.count(conditions,function(c){
+    Talk.models.user.count(conditions,function(err, c){
       console.log('We have '+c+' users who\'s first name starts with "zohar"');
     });
