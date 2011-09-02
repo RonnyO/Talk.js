@@ -7,7 +7,8 @@ var DB            = require('./include/mongoose'),
  */
 var Talk = function(){
 
-  /** @@NOTE
+  /** 
+   * @@NOTE
    * Calls to private methods in the Talk module should be done using call / apply to perserve the execution scope.
    */
 
@@ -84,10 +85,8 @@ Talk.prototype = {
   /**
    * Initialize the talk instance.
    * Connect to MongoDB.
-   * Require all models from ./models package
    */
   init:function(){
-    //var db = DB.Mongoose.createConnection("mongodb://localhost/talk_js");
     DB.Mongoose.connect('mongodb://localhost/talk_js');
   }
 }
