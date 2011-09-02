@@ -1,6 +1,21 @@
 # Talk.js - API
 Talk exposes an API that can be used to access various components of the framework either directly from the console or inside your Node application.
 
+## Using Talk in your application
+
+You can use Talk in your Node application by simply requiring the main *talk* modules like so:
+
+    var Talk = require('talk/talk');
+    Talk.init();
+    
+If you're happy using the CLI, you can fire up the Talk console by running *script/console* inside the *talk* module's top level directory. This will open an Rails-like console and allow you to
+work directly with Talk API. the Talk object is exported into the CLI environment and is named (wait for it....) *Talk*.
+
+    script/console
+    talk.js > Talk.models.user.findById('4e5514376534a62726000001',function(err,user){
+      // ... do something with the user you found
+    });
+    
 ## Talk Models
 
 Talk models use [Mongoose](http://mongoosejs.com/ "Mongoose") as the ORM of choice to communicate with the underlying MongoDB on which we store all our data.
