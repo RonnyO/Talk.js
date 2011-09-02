@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 
-var Talk = require('../talk/talk'),
-    repl = require("repl");
+var Talk  = require('../talk/talk'),
+    repl  = require("repl"),
+    stdin = process.openStdin();
+    
 Talk.init();
+
+stdin.on('keypress', function (chunk, key) {
+  if (key && key.ctrl && (key.name === 'c' || key.name === 'd')){
+    process.stdout.write('\nExiting....\n');
+    process.exit();
+  }
+});
 
 repl.start("talk.js > ").context.Talk = Talk;
