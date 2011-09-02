@@ -1,7 +1,8 @@
-var Talk = require('./talk');
-
+var Talk = require('./talk'),
+    repl = require("repl");
 Talk.init();
 
+repl.start("talk.js > ").context.Talk = Talk;
 /*
 Talk.models.user.create({
 	'first_name':'Zoharush',
