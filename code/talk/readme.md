@@ -13,8 +13,8 @@ work directly with Talk API. the Talk object is exported into the CLI environmen
 
     script/console
     talk.js > Talk.models.user.findById('4e5514376534a62726000001',function(err,user){
-      // ... do something with the user you found
-    });
+    ... // ... do something with the user you found
+    ... });
     
 ## Talk Models
 
