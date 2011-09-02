@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+var Talk = require('../talk/talk'),
+    repl = require("repl");
+Talk.init();
+
+repl.start("talk.js > ").context.Talk = Talk;
