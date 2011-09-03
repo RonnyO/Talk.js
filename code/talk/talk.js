@@ -36,7 +36,7 @@ var Talk = function(){
   }
   
   boot.call(this);
-}
+};
 
 
 /**
@@ -53,6 +53,6 @@ Talk.prototype = {
     //var db = DB.Mongoose.createConnection("mongodb://localhost/talk_js");
     DB.Mongoose.connect('mongodb://localhost/talk_js');
   }
-}
+};
 
 module.exports = new Talk();
