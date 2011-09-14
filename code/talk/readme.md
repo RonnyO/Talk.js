@@ -6,6 +6,7 @@ Talk is based on Node.js, which means it can only run on OSs that support Node. 
 
 1. [Download](http://www.ubuntu.com/download "Download") and install Ubuntu either as a VM, sole OS or dual-boot (in case you wish to keep your current OS)
 2. Once you're logged into Ubuntu, fire up your Terminal application (Accessories -> Terminal) and run the following commands, which will prepare your system for installation (do not copy the $ sign)
+        
         $ sudo apt-get update
         $ sudo apt-get upgrade
         $ sudo apt-get install git curl wget build-essential libssl-dev vim
@@ -16,6 +17,7 @@ Talk is based on Node.js, which means it can only run on OSs that support Node. 
 4. Follow the instructions on how to create your installer script and copy the generated configuration to that script.
 5. Run the script (answer 'Yes' to all questions) and you should be almost good to go
 6. In your terminal, clone the Talk.js repository to a folder on your machine and install the required NPM packages:
+        
         $ cd ~ && mkdir -p projects && cd projects
         $ git clone git@github.com:RonnyO/Talk.js.git talk_js
         $ cd talk_js
