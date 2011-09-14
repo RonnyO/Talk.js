@@ -7,3 +7,5 @@
  */
 
 exports.user = require('./user');
+exports.role = require('./role');
+exports.context = require('./context');
