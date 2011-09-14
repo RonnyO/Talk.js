@@ -1,6 +1,27 @@
 # Talk.js - API
 Talk exposes an API that can be used to access various components of the framework either directly from the console or inside your Node application.
 
+## Setting up your environment
+Talk is based on Node.js, which means it can only run on OSs that support Node. You will need to install Node, NPM, MongoDB and a few Node packages to get started. To help you set up, here are the steps required to install all related software on Ubuntu Linux (the princinples should be similar on other *nix / Linux OSs)
+
+1. [Download](http://www.ubuntu.com/download "Download") and install Ubuntu either as a VM, sole OS or dual-boot (in case you wish to keep your current OS)
+2. Once you're logged into Ubuntu, fire up your Terminal application (Accessories -> Terminal) and run the following commands, which will prepare your system for installation (do not copy the $ sign)
+    $ sudo apt-get update
+    $ sudo apt-get upgrade
+    $ sudo apt-get install git curl wget build-essential libssl-dev vim
+3. Head over to [apptob](http://apptob.org/) where you can create an installer script for Ubuntu, which will install Node, NPM and MongoDB. In the configuration screen choose:
+    * Node.js - Stable
+    * App Installer - Node Package Manager
+    * NoSQL - MongoDB
+4. Follow the instructions on how to create your installer script and copy the generated configuration to that script.
+5. Run the script (answer 'Yes' to all questions) and you should be almost good to go
+6. In your terminal, clone the Talk.js repository to a folder on your machine and install the required NPM packages:
+    $ cd ~ && mkdir -p projects && cd projects
+    $ git clone git@github.com:RonnyO/Talk.js.git talk_js
+    $ cd talk_js
+    $ npm install mongodb mongoose mongoose-types express
+7. That's it - You're ready to Talk!
+
 ## Using Talk in your application
 
 You can use Talk in your Node application by simply requiring the main *talk* modules like so:
