@@ -1,2 +1,3 @@
 .project
 code/node_modules*
+.idea*
