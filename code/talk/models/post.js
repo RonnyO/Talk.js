@@ -1,6 +1,5 @@
 var DB = require('../include/mongoose');
 
-var Date = DB.Mongoose.SchemaTypes.Date;
 var ObjectId = DB.Mongoose.Schema.ObjectId;
 
 var Post = new DB.Schema({

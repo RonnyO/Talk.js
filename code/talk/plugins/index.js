@@ -5,3 +5,4 @@
  */
 
 exports.example = require('./example');
+exports.wall = require('./wall');
