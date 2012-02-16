@@ -18,7 +18,6 @@ var Talk = function(){
   /** Entry point to plugins **/
   this.plugins = {};
 
-  var API = require('./include/api');
   /**
    * Internal boot of the Talk instance.
    * Add any relevant private boot-related calls here.
@@ -26,7 +25,6 @@ var Talk = function(){
   function boot(){
     init_orm.call(this);
     load_plugins.call(this);
-    new API.call(this);
   }
   
   /**
