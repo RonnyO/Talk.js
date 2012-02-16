@@ -9,3 +9,5 @@
 exports.user = require('./user');
 exports.role = require('./role');
 exports.group = require('./group');
+exports.thread = require('./thread');
+exports.post = require('./post');

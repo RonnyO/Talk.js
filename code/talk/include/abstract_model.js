@@ -9,7 +9,7 @@ var AbstractModel = function(Model){
     attrs['created_at'] = new Date();
     var model = new Model(attrs);
     model.save(callback.bind(this));
-  }
+  };
 
   /**
    * Counts documents by criteria.
@@ -19,7 +19,7 @@ var AbstractModel = function(Model){
   this.count = function(conditions, callback){
     var args = get_args_with_scoped_callback.call(this,arguments);
     Model.count.apply(Model, args);
-  }
+  };
   
   /**
    * Finds documents by criteria
@@ -31,7 +31,7 @@ var AbstractModel = function(Model){
   this.find = function(query, fields, options, callback){
     var args = get_args_with_scoped_callback.call(this,arguments);
     Model.find.apply(Model, args);
-  }
+  };
   
   /**
    * Finds one document by criteria
@@ -43,7 +43,7 @@ var AbstractModel = function(Model){
   this.findOne = function(query, fields, options, callback){
     var args = get_args_with_scoped_callback.call(this,arguments);
     Model.findOne.apply(Model, args);
-  }
+  };
   
   /**
    * Finds one document by ObjecTId
@@ -55,7 +55,7 @@ var AbstractModel = function(Model){
   this.findById = function(id, fields, callback){
     var args = get_args_with_scoped_callback.call(this,arguments);
     Model.findById.apply(Model, args);
-  }
+  };
 
   /**
    * Update documents by criteria
@@ -67,7 +67,7 @@ var AbstractModel = function(Model){
   this.update = function(conditions, update, options, callback){
     var args = get_args_with_scoped_callback.call(this,arguments);
     Model.update.apply(Model, args);
-  }
+  };
   
   /**
    * Removes documents by criteria
@@ -76,14 +76,14 @@ var AbstractModel = function(Model){
    */
   this.remove = function(conditions, callback){
     Model.remove(conditions, callback.bind(this));
-  }
+  };
 
   /**
    * Returns reference to the internal Mongoose model object for advance querying
    */
   this.object = function(){
     return Model;
-  }
+  };
   
   /**
    * Modifies a callback in args to run under the model's scope.
@@ -101,7 +101,7 @@ var AbstractModel = function(Model){
       }
     }
     return args;
-  }
-}
+  };
+};
 
 module.exports = AbstractModel;
