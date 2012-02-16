@@ -36,7 +36,7 @@ var Talk = function(){
     var obj_name = 'models';
     var init_callback = function(package, package_name){
       this.models[package_name] = new AbstractModel(package[package_name]);
-    }
+    };
     auto_load.apply(this, [obj_name, init_callback]);
   }
   
@@ -48,7 +48,7 @@ var Talk = function(){
     var obj_name = 'plugins';
     var init_callback = function(package, package_name){
       this.plugins[package_name] = new package[package_name](this);
-    }
+    };
     auto_load.apply(this, [obj_name, init_callback]);
   }
 
