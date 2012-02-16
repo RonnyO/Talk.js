@@ -1,0 +1,24 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+info using npm@1.1.0-2
+info using node@v0.6.8
+verbose config file /home/zohar/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+ERR! Couldn't read dependencies.
+ERR! Error: ENOENT, no such file or directory '/home/zohar/workspace/talk_js/code/talk/package.json'
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 3.0.0-16-generic
+ERR! command "node" "/usr/local/bin/npm" "install"
+ERR! cwd /home/zohar/workspace/talk_js/code/talk
+ERR! node -v v0.6.8
+ERR! npm -v 1.1.0-2
+ERR! path /home/zohar/workspace/talk_js/code/talk/package.json
+ERR! code ENOENT
+ERR! message ENOENT, no such file or directory '/home/zohar/workspace/talk_js/code/talk/package.json'
+ERR! errno {}
+verbose exit [ 1, true ]
